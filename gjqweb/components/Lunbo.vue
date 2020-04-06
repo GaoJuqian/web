@@ -1,5 +1,5 @@
 <template>
-  <v-carousel>
+  <v-carousel show-arrows show-arrows-on-hover>
     <v-carousel-item
       v-for="(item, i) in items"
       :key="i"
@@ -9,7 +9,6 @@
     ></v-carousel-item>
   </v-carousel>
 </template>
-
 <script>
 export default {
   data() {

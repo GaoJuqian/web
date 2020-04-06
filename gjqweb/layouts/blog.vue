@@ -1,6 +1,9 @@
 <template>
   <div>
     <header>
+      <div class="list-nav">
+        <v-icon color="rgb(223, 223, 223)" @click="NavList">fa-list</v-icon>
+      </div>
       <div class="logo">
         <nuxt-link to="/"><h2>GaoJuqian</h2></nuxt-link>
       </div>
@@ -15,6 +18,7 @@
           <nuxt-link to="/category"><li>分类</li></nuxt-link>
         </ul>
       </nav>
+
       <div class="search">
         <v-text-field
           v-model="label"
@@ -40,12 +44,19 @@
 </template>
 
 <script>
+import '@fortawesome/fontawesome-free/css/all.css'
+
 export default {
   data() {
     return {
       label: '',
       ICP: '冀 ICP 备 19008505 号 - 2',
       YEAR: '© 2020 GaoJuqian'
+    }
+  },
+  methods: {
+    NavList() {
+      // alert('OK')
     }
   }
 }
@@ -54,6 +65,7 @@ export default {
 <style>
 header {
   width: 100vw;
+  /* 导航栏高度 */
   height: 3.5em;
   background-color: rgba(0, 0, 0, 0.15);
   display: flex;
@@ -72,11 +84,10 @@ nav ul {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  /* width: 550px; */
-  /* height: 2em; */
   justify-content: space-evenly;
 }
 nav ul li {
+  /* 导航栏一同设置 */
   height: 3.5em;
   line-height: 3.5em;
   width: 4em;
@@ -89,7 +100,7 @@ nav ul li:hover {
 }
 .logo {
   height: 2em;
-  width: 120px;
+  /* width: 120px; */
 }
 .logo h2:hover {
   color: rgb(85, 81, 255);
@@ -129,6 +140,9 @@ a {
 .main {
   height: 100vh;
 }
+.list-nav {
+  display: none;
+}
 footer {
   width: 100vw;
   height: 6em;
@@ -139,5 +153,17 @@ footer {
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
+}
+/* 移动端 */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+  .list-nav {
+    display: inline;
+  }
+  .search {
+    display: none;
+  }
 }
 </style>
