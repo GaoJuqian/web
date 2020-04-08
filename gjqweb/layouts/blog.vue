@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header>
+    <header :style="{ 'background-color': headColor }">
       <div class="list-nav">
         <v-icon color="rgb(223, 223, 223)" @click="NavList">fa-list</v-icon>
       </div>
@@ -27,6 +27,9 @@
           label="搜索"
         ></v-text-field>
       </div>
+      <div class="switch">
+        <v-icon color="rgb(223, 223, 223)" @click="ModeSwitch">fa-sun</v-icon>
+      </div>
     </header>
     <main>
       <div class="banner">
@@ -51,12 +54,29 @@ export default {
     return {
       label: '',
       ICP: '冀 ICP 备 19008505 号 - 2',
-      YEAR: '© 2020 GaoJuqian'
+      YEAR: '© 2020 GaoJuqian',
+      headColor: 'rgba(0, 0, 0, 0.15)'
     }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
     NavList() {
       // alert('OK')
+    },
+    ModeSwitch() {},
+    handleScroll() {
+      const scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop
+      // console.log(scrollTop) // 页面滚动距离
+      if (scrollTop > 300) {
+        this.headColor = 'black'
+      } else {
+        this.headColor = 'rgba(0, 0, 0, 0.15)'
+      }
     }
   }
 }
@@ -67,7 +87,7 @@ header {
   width: 100vw;
   /* 导航栏高度 */
   height: 3.5em;
-  background-color: rgba(0, 0, 0, 0.15);
+  /* background-color: rgba(0, 0, 0, 0.15);  handleScroll（）替换 */
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -129,6 +149,7 @@ a {
   width: 100vw;
   height: 350px;
 }
+
 .banner img {
   width: 100%;
   height: 100%;
@@ -141,6 +162,9 @@ a {
   height: 100vh;
 }
 .list-nav {
+  display: none;
+}
+.switch {
   display: none;
 }
 footer {
@@ -156,10 +180,17 @@ footer {
 }
 /* 移动端 */
 @media (max-width: 768px) {
+  header {
+    justify-content: center;
+  }
+  .logo {
+    margin: 0 auto;
+  }
   nav {
     display: none;
   }
-  .list-nav {
+  .list-nav,
+  .switch {
     display: inline;
   }
   .search {
